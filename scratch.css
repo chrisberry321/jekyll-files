@@ -1,0 +1,179 @@
+
+/****** Icon changes for mobile nav ********/
+
+@media only screen and (max-width: 900px)
+.title-nav-wrapper {
+    padding: 20px !important;
+}
+
+.icon-menu:before {
+    font-size: 3.5em;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    margin: 23px 14px 0 0;
+}
+
+
+
+
+/******** MAKING GOOGLE MAP MORE USER FRIENDLY *********/
+
+/***** Map id's ******/
+portland id = #block-yui_3_17_2_3_1457551061173_20276 {}
+seattle id = #block-yui_3_17_2_3_1457551061173_19297 {}
+phildelphia id = #block-yui_3_17_2_3_1465327099954_17168 {}
+
+/******* MAP CLASSES AFTER ID ********/
+div class="sqs-block-content page-map"
+  div class="gm-style"
+
+
+/***map1 PORTLAND***/
+<div id="block-yui_3_17_2_3_1457551061173_20276" class="map">
+  <a class="btn map-toggle" href="#0">Explore</a>
+  <div class="map-disable"></div>
+  <div id="map_canvas_01" class="map-canvas"></div>
+</div>
+/***map2 SEATTLE***/
+<div id="block-yui_3_17_2_3_1457551061173_19297" class="map more"id="map2">
+  <a class="btn map-toggle2" href="#0">Explore</a>
+  <div class="map-disable"></div>
+  <div id="map_canvas_02" class="map-canvas"></div>
+</div>
+/****map3 PHILIDELPHIA****/
+<div id="block-yui_3_17_2_3_1465327099954_17168" class="map more"id="map3">
+  <a class="btn map-toggle3" href="#0">Explore</a>
+  <div class="map-disable"></div>
+  <div id="map_canvas_03" class="map-canvas"></div>
+</div>
+
+
+/***** Google map js *****/
+var mapOptions = {
+  zoom: 12,
+  disableDefaultUI: true,
+  center: new google.maps.LatLng(38.8935965, -77.014576),
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+var map01 = new google.maps.Map(document.getElementById('map_canvas_01'), mapOptions),
+    map02 = new google.maps.Map(document.getElementById('map_canvas_02'), mapOptions),
+    map03 = new google.maps.Map(document.getElementById('map_canvas_03'), mapOptions);
+// Map interaction events
+$('body').on('click', '.map-toggle, .map-toggle2, .map-toggle3', function(e){
+  e.preventDefault();
+  $(this).next('.map-disable').toggleClass('hide');
+});
+
+
+/******** Map buttons explore and close ********/
+var btn = {
+  el: null,
+  init: function(){
+    this.el = $(".map, .more");
+    this.bindAll();
+  },
+
+  bindAll: function(){
+    this.el.find(".map-toggle").unbind("click.change");
+    this.el.find(".map-toggle").bind("click.change", function(){
+      var elem = $(".map-toggle");
+      if(elem.html() === "Explore"){
+        elem.html("Close");
+      }else{
+        elem.html("Explore");
+      }
+    });
+    this.el.find(".map-toggle2").unbind("click.change");
+    this.el.find(".map-toggle2").bind("click.change", function(){
+      var elem = $(".map-toggle2");
+      if(elem.html() === "Explore"){
+        elem.html("Close");
+      }else{
+        elem.html("Explore");
+      }
+    });
+    this.el.find(".map-toggle3").unbind("click.change");
+    this.el.find(".map-toggle3").bind("click.change", function(){
+      var elem = $(".map-toggle3");
+      if(elem.html() === "Explore"){
+        elem.html("Close");
+      }else{
+        elem.html("Explore");
+      }
+    });
+  }
+}
+
+btn.init();
+
+
+
+
+/****** CSS FOR MAPS *******/
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 0.7em;
+  background: #555;
+  color: #fff;
+  text-decoration: none;
+}
+
+.map, .more {
+  position: relative;
+  height: 30em;
+  text-align: left;
+}
+
+.map-canvas {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #ccc;
+}
+
+.map-toggle, .map-toggle2, .map-toggle3 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  opacity: 0.7;
+  border-bottom-left-radius: 0.5em;
+}
+
+.map-disable {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 2px solid #111;
+  opacity: 0.3;
+}
+
+.map-disable.hide {
+  z-index: -1;
+}
+
+
+/* Pen style */
+body {
+  margin: 2em;
+  background: #F4F7F7;
+  color: #333;
+  font-family: Lato, sans-serif;
+}
+
+h1 {
+  color: #08c;
+}
+
+.lead {
+  font-size: 120%;
+}
